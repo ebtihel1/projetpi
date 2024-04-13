@@ -1,0 +1,25 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>date_debut</th>
+            <th>date_fin</th>
+            <th>mention</th>
+            <th>Action</th> <!-- Ajout d'une colonne pour les actions -->
+        </tr>
+    </thead>
+    <tbody>
+        {% for d in diplome %}
+        <tr>
+            <td>{{ d.id }}</td>
+            <td>{{ d.Date_Debut }}</td> 
+            <td>{{ d.Date_Fin }}</td>
+            <td>{{ d.Mention }}</td>
+            <td>
+                <a href="{{ path('editDiplome', {'id': d.id}) }}" class="btn btn-primary">Éditer</a>
+                <a href="{{ path('deleteDiplome', {'id': d.id}) }}" class="btn btn-danger">Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
