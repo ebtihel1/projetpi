@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Formation;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
 class Cours
@@ -14,6 +15,10 @@ class Cours
     private ?int $ref = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Regex(
+        pattern: '/\D+/', 
+        message: "Le nom ne peut pas contenir que des chiffres"
+    )]
     private ?string $nom = null;
 
     #[ORM\ManyToOne(targetEntity: Formation::class, inversedBy: 'cours')]

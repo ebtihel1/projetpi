@@ -1,4 +1,14 @@
-<table class="table">
+{# readD.html.twig #}
+
+{% extends 'back.html.twig' %}
+
+{% block title %}{% endblock %}
+{% block content %}
+
+                <!-- Content Area -->
+                <div class="container mt-3">
+                    <h1>List Diploma</h1>
+                    <table class="table">
     <thead>
         <tr>
             <th>id</th>
@@ -11,15 +21,27 @@
     <tbody>
         {% for d in diplome %}
         <tr>
-            <td>{{ d.id }}</td>
-            <td>{{ d.Date_Debut }}</td> 
-            <td>{{ d.Date_Fin }}</td>
-            <td>{{ d.Mention }}</td>
+            <td>{{ d.getId() }}</td>
+            <td>{{ d.getDateDebut()|date('Y-m-d') }}</td> 
+            <td>{{ d.getDateFin()|date('Y-m-d') }}</td>
+            <td>{{ d.getMention() }}</td>
             <td>
-                <a href="{{ path('editDiplome', {'id': d.id}) }}" class="btn btn-primary">Éditer</a>
                 <a href="{{ path('deleteDiplome', {'id': d.id}) }}" class="btn btn-danger">Supprimer</a>
+
+                <a href="{{ path('editDiplome', {'id': d.getId()}) }}" class="btn btn-primary">Éditer</a>
+
+               
             </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+<div style="text-align: center;">
+                        <a href="{{ path('addDiplome') }}" class="btn btn-primary">Ajouter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}

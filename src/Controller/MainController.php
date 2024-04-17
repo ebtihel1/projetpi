@@ -20,10 +20,14 @@ class MainController extends AbstractController
     #[Route('/home', name: 'app_home')]
     public function index(): Response
     {
-        return $this->render('base.html.twig');
+        return $this->render('cours/index.html.twig', [
+            'controller_name' => 'CoursController',
+            'current_page' => 'home', // Définissez la page actuelle comme 'home'
+        ]);
     }
+    
 
-
+  
     /********************************************Afficher********************************************************* */
     #[Route('/Formation/read', name: 'read')]
     public function read(FormationRepository $formationRepo): Response

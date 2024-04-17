@@ -17,12 +17,18 @@ class Formation
     private ?int $id = null;
 
     #[Assert\NotBlank(message: "Le nom ne peut pas être vide")]
-    #[Assert\Type(type: "string", message: "Le nom doit être une chaîne de caractères")]
+    #[Assert\Regex(
+        pattern: "/^\D+$/",
+        message: "Le nom ne doit pas contenir de chiffres"
+    )]
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
     #[Assert\NotBlank(message: "Le domaine ne peut pas être vide")]
-    #[Assert\Type(type: "string", message: "Le domaine doit être une chaîne de caractères")]
+    #[Assert\Regex(
+        pattern: "/^\D+$/",
+        message: "Le domaine ne doit pas contenir de chiffres"
+    )]
     #[ORM\Column(length: 255)]
     private ?string $domaine = null;
 

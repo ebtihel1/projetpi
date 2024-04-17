@@ -3,11 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Cours;
-use Doctrine\ORM\Mapping\Entity;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use App\Entity\Formation;
 
@@ -19,6 +18,8 @@ class CoursType extends AbstractType
             ->add('nom')
             ->add('formation', EntityType::class, [
                 'class' => Formation::class, // Spécifiez l'entité Formation ici
+                'choice_label' => 'nom', // Le champ de l'entité Formation à afficher dans le formulaire
+                'placeholder' => 'Sélectionnez une formation', // Texte par défaut pour le champ
             ])
             ->add('file', FileType::class, [
                 'label' => 'Fichier', // Étiquette du champ
@@ -29,7 +30,6 @@ class CoursType extends AbstractType
                 ],
             ]);
     }
-      
 
     public function configureOptions(OptionsResolver $resolver): void
     {

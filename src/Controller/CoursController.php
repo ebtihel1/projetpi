@@ -15,10 +15,10 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class CoursController extends AbstractController
 {
-    #[Route('/cours', name: 'app_cours')]
+    #[Route('/home', name: 'app_cours')]
     public function index(): Response
     {
-        return $this->render('cours/index.html.twig', [
+        return $this->render('base.html.twig', [
             'controller_name' => 'CoursController',
         ]);
     }
@@ -33,22 +33,26 @@ class CoursController extends AbstractController
     }
 
     #[Route('/addCours', name: 'addCours')]
-   public function add(ManagerRegistry $doctrine, Request $request): Response
-{
-    $em = $doctrine->getManager();
-
-    $cours = new Cours();
-
-    $form = $this->createForm(CoursType::class, $cours);
-    $form->add('Ajouter', SubmitType::class);
-    $form->handleRequest($request);
-    if ($form->isSubmitted() && $form->isValid()) {
-        $em->persist($cours);
-        $em->flush();
-        return $this->redirectToRoute('readCours'); // Utilisez 'readCours' comme nom de route
-    } else {
-        return $this->renderForm('cours/createC.html.twig', ['form' => $form->createView()]);
-    }
+    public function add(ManagerRegistry $doctrine, Request $request): Response
+    {
+        $em = $doctrine->getManager();
+    
+        $cours = new Cours();
+    
+        // Ajoutez le code pour accéder à la propriété "nom"
+        $nom = $cours->getNom();
+    
+        $form = $this->createForm(CoursType::class, $cours);
+        $form->add('Ajouter', SubmitType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($cours);
+            $em->flush();
+            return $this->redirectToRoute('readCours'); // Utilisez 'readCours' comme nom de route
+        } else {
+            return $this->renderForm('cours/createC.html.twig',  ['form' => $form]);
+        }
+    
 }
 
 
